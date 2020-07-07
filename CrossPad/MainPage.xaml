@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>   
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:CrossPad.Core.Helpers;assembly=CrossPad"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
+             x:Class="CrossPad.MainPage">
+
+    <Grid Margin="1, 1, 1, 1" RowSpacing="0"
+          RowDefinitions="32, *, 20"
+          ColumnDefinitions="*">
+
+        <StackLayout Orientation="Horizontal" Grid.Row="0" Margin="0, 0, 0, 0">
+
+            <Button ImageSource="{local:ImageResource CrossPad.Assets.open.png}"
+                BorderWidth="0"
+                BackgroundColor="Transparent"
+                Clicked="Open_Clicked"/>
+
+            <Button ImageSource="{local:ImageResource CrossPad.Assets.new.png}"
+                BorderWidth="0"
+                BackgroundColor="Transparent"
+                Clicked="New_Clicked" />
+
+            <Button ImageSource="{local:ImageResource CrossPad.Assets.save.png}"
+                BorderWidth="0"
+                BackgroundColor="Transparent"
+                Clicked="Save_Clicked" />
+
+        </StackLayout>
+
+        <Editor Grid.Row="1" Margin="0, 0, 0, 0"
+                HorizontalOptions="FillAndExpand" 
+                VerticalOptions="Fill"
+                Text="{Binding TextContent}"
+                TextChanged="Editor_TextChanged"/>
+
+        <Label Text="{Binding StatusText}" 
+               FontSize="Micro" 
+               FontAttributes="Bold"
+               TextColor="Black"
+               Grid.Row="2" 
+               Margin="0, 0, 0, 0"
+               HorizontalOptions="End" Padding="0, 0, 0, 0"
+               VerticalTextAlignment="Start">
+            <Label.Triggers>
+                <DataTrigger TargetType="Label" Binding="{Binding IsDirty}" Value="True">
+                    <Setter Property="TextColor" Value="Red" />
+                </DataTrigger>
+            </Label.Triggers>
+        </Label>
+
+    </Grid>
+
+</ContentPage>
+    
+
