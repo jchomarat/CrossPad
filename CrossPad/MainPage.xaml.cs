@@ -67,10 +67,10 @@ namespace CrossPad
             BindingContext = this;
         }
 
-        private void Open_Clicked(object sender, EventArgs e)
+        private async void Open_Clicked(object sender, EventArgs e)
         {
             // Call the Picker from the current platform implementation of the service
-            string selectedFileName = DependencyService.Get<IFileService>().GetFilePath(new string[] { "Text file|*.txt" });
+            string selectedFileName = await DependencyService.Get<IFileService>().GetFilePath(new string[] { "Text file|*.txt" });
             if (!string.IsNullOrEmpty(selectedFileName))
             {
                 // Store the file name and path to save it later

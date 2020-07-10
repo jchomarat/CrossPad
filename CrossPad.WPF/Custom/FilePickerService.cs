@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System.Threading.Tasks;
+using Xamarin.Forms;
 using CrossPad.Core.Services;
 using Microsoft.Win32;
 
@@ -7,8 +8,10 @@ namespace CrossPad.WPF.Custom
 {
     public class FileService : IFileService
     {
-        public string GetFilePath(string[] AllowedTypes = null)
+        public Task<string> GetFilePath(string[] AllowedTypes = null)
         {
+            var tcs = new TaskCompletionSource<string>();
+
             OpenFileDialog pickDialog = new OpenFileDialog();
             if (AllowedTypes != null && AllowedTypes.Length > 0)
             {
@@ -17,13 +20,14 @@ namespace CrossPad.WPF.Custom
 
             if (pickDialog.ShowDialog() == true)
             {
-                return pickDialog.FileName;
+                tcs.SetResult(pickDialog.FileName);
             }
             else
             {
-                return string.Empty;
+                tcs.SetResult(string.Empty);
             }
-                //txtEditor.Text = File.ReadAllText(openFileDialog.FileName);
+
+            return tcs.Task;
         }
 
         public string SetFilePath(string[] AllowedTypes = null)

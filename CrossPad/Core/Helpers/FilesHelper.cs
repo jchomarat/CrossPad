@@ -17,9 +17,9 @@ namespace CrossPad.Core.Helpers
             {
                 return File.ReadAllText(FileName);
             }
-            catch(Exception)
+            catch(Exception ex)
             {
-                Debug.WriteLine($"Could not open file ${FileName}");
+                Debug.WriteLine($"Could not open file ${FileName}. The reason is: ${ex.Message}");
                 return string.Empty;
             }
         }
