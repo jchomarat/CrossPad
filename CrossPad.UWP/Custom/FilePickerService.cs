@@ -10,7 +10,7 @@ namespace CrossPad.UWP.Custom
 {
     public class FileService : IFileService
     {
-        public async Task<string> GetFilePath(string[] AllowedTypes = null)
+        public async Task<string> GetFilePath(Tuple<string, string>[] AllowedTypes = null)
         {
             var tcs = new TaskCompletionSource<string>();
 
@@ -22,7 +22,7 @@ namespace CrossPad.UWP.Custom
             {
                 AllowedTypes.ForEach(t =>
                 {
-                    picker.FileTypeFilter.Add(t.Split("|*")[1]);
+                    picker.FileTypeFilter.Add(t.Item2);
                 });
             }
 
@@ -38,15 +38,16 @@ namespace CrossPad.UWP.Custom
             }
         }
 
-        public async Task<string> SetFilePath(string[] AllowedTypes = null)
+        public async Task<string> SetFilePath(Tuple<string, string>[] AllowedTypes = null)
         {
             var picker = new Windows.Storage.Pickers.FileSavePicker();
             picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+            
             if (AllowedTypes != null && AllowedTypes.Length > 0)
             {
                 AllowedTypes.ForEach(t =>
                 {
-                    picker.FileTypeChoices.Add(t.Split("|*")[0], new List<string>() { t.Split("|*")[1] });
+                    picker.FileTypeChoices.Add(t.Item1, new List<string>() { t.Item2 });
                 });
             }
 

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace CrossPad.Core.Services
 {
@@ -7,15 +8,15 @@ namespace CrossPad.Core.Services
         /// <summary>
         /// Method to implement to open a file picker
         /// </summary>
-        /// <param name="AllowedTypes">Array of allowed files types. Format "Text files|*.txt"</param>
+        /// <param name="AllowedTypes">Array of allowed file types as tuple with description / extension</param>
         /// <returns>The full path of the selected file. Empty if none selected</returns>
-        Task<string> GetFilePath(string[] AllowedTypes = null);
+        Task<string> GetFilePath(Tuple<string, string>[] AllowedTypes = null);
 
         /// <summary>
         /// Method to implement to save a file to
         /// </summary>
-        /// <param name="AllowedTypes">Array of allowed files types. Format "Text files|*.txt"</param>
+        /// <param name="AllowedTypes">Array of allowed file types as tuple with description / extension"</param>
         /// <returns>The location and file name of the new file to save</returns>
-        Task<string> SetFilePath(string[] AllowedTypes = null);
+        Task<string> SetFilePath(Tuple<string, string>[] AllowedTypes = null);
     }
 }

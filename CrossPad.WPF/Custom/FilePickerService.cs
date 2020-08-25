@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using CrossPad.Core.Services;
 using Microsoft.Win32;
@@ -8,14 +10,14 @@ namespace CrossPad.WPF.Custom
 {
     public class FileService : IFileService
     {
-        public Task<string> GetFilePath(string[] AllowedTypes = null)
+        public Task<string> GetFilePath(Tuple<string, string>[] AllowedTypes = null)
         {
             var tcs = new TaskCompletionSource<string>();
 
             OpenFileDialog pickDialog = new OpenFileDialog();
             if (AllowedTypes != null && AllowedTypes.Length > 0)
             {
-                pickDialog.Filter = string.Join('|', AllowedTypes);
+                pickDialog.Filter = string.Join('|', AllowedTypes.Select(t => $"{t.Item1}|*{t.Item2}").ToArray());
             }
 
             if (pickDialog.ShowDialog() == true)
@@ -30,12 +32,12 @@ namespace CrossPad.WPF.Custom
             return tcs.Task;
         }
 
-        public Task<string> SetFilePath(string[] AllowedTypes = null)
+        public Task<string> SetFilePath(Tuple<string, string>[] AllowedTypes = null)
         {
             var tcs = new TaskCompletionSource<string>();
 
             SaveFileDialog saveDialog = new SaveFileDialog();
-            saveDialog.Filter = string.Join('|', AllowedTypes);
+            saveDialog.Filter = string.Join('|', AllowedTypes.Select(t => $"{t.Item1}|*{t.Item2}").ToArray());
             saveDialog.ShowDialog();
 
             if (!string.IsNullOrEmpty(saveDialog.FileName))

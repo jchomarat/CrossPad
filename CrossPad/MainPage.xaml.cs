@@ -70,7 +70,7 @@ namespace CrossPad
         private async void Open_Clicked(object sender, EventArgs e)
         {
             // Call the Picker from the current platform implementation of the service
-            string selectedFileName = await DependencyService.Get<IFileService>().GetFilePath(new string[] { "Text file|*.txt" });
+            string selectedFileName = await DependencyService.Get<IFileService>().GetFilePath(new [] { new Tuple <string, string>("Text file", ".txt") });
             if (!string.IsNullOrEmpty(selectedFileName))
             {
                 // Store the file name and path to save it later
@@ -146,7 +146,7 @@ namespace CrossPad
             {
                 // Ask the user where to save the file
                 // Call the dialog to pick destination from the current platform implementation of the service
-                string newFileName = await DependencyService.Get<IFileService>().SetFilePath(new string[] { "Text file|*.txt" });
+                string newFileName = await DependencyService.Get<IFileService>().SetFilePath(new[] { new Tuple<string, string>("Text file", ".txt") });
 
                 if (!string.IsNullOrEmpty(newFileName))
                 {
