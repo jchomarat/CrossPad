@@ -30,8 +30,10 @@ namespace CrossPad.WPF.Custom
             return tcs.Task;
         }
 
-        public string SetFilePath(string[] AllowedTypes = null)
+        public Task<string> SetFilePath(string[] AllowedTypes = null)
         {
+            var tcs = new TaskCompletionSource<string>();
+
             SaveFileDialog saveDialog = new SaveFileDialog();
             saveDialog.Filter = string.Join('|', AllowedTypes);
             saveDialog.ShowDialog();
@@ -39,12 +41,14 @@ namespace CrossPad.WPF.Custom
             if (!string.IsNullOrEmpty(saveDialog.FileName))
             {
                 // The user has picked a location, send it back so that the file can be saved
-                return saveDialog.FileName;
+                tcs.SetResult(saveDialog.FileName);
             }
             else
             {
-                return string.Empty;
+                tcs.SetResult(string.Empty);
             }
+
+            return tcs.Task;
         }
     }
 }

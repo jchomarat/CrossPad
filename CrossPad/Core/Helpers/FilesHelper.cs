@@ -19,7 +19,7 @@ namespace CrossPad.Core.Helpers
             }
             catch(Exception ex)
             {
-                Debug.WriteLine($"Could not open file ${FileName}. The reason is: ${ex.Message}");
+                Debug.WriteLine($"Could not open file {FileName}. The reason is: {ex.Message}");
                 return string.Empty;
             }
         }
@@ -31,9 +31,9 @@ namespace CrossPad.Core.Helpers
                 File.WriteAllText(FileName, FileContent, System.Text.Encoding.UTF8);
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Debug.WriteLine($"Could not write file ${FileName}");
+                Debug.WriteLine($"Could not write file {FileName}. The reason is: {ex.Message}");
                 return false;
             }
         }

@@ -146,7 +146,7 @@ namespace CrossPad
             {
                 // Ask the user where to save the file
                 // Call the dialog to pick destination from the current platform implementation of the service
-                string newFileName = DependencyService.Get<IFileService>().SetFilePath(new string[] { "Text file|*.txt" });
+                string newFileName = await DependencyService.Get<IFileService>().SetFilePath(new string[] { "Text file|*.txt" });
 
                 if (!string.IsNullOrEmpty(newFileName))
                 {

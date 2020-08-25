@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1080" />
-    <PackageReference Include="Xamarin.Forms.Platform.WPF" Version="4.7.0.1080" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1269" />
+    <PackageReference Include="Xamarin.Forms.Platform.WPF" Version="4.8.0.1269" />
   </ItemGroup>
 
   <ItemGroup>
