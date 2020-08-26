@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using CrossPad.Core.Services;
 using AppKit;
@@ -8,14 +10,14 @@ namespace CrossPad.MacOS.Custom
 {
     public class FileService : IFileService
     {
-        public Task<string> GetFilePath(string[] AllowedTypes = null)
+        public Task<string> GetFilePath(Tuple<string, string>[] AllowedTypes = null)
         {
             var tcs = new TaskCompletionSource<string>();
 
             var dlg = NSOpenPanel.OpenPanel;
             dlg.CanChooseFiles = true;
             dlg.CanChooseDirectories = false;
-            dlg.AllowedFileTypes = new string[] { "txt" };
+            dlg.AllowedFileTypes = AllowedTypes.Select(t => (t.Item2.StartsWith(".") ? t.Item2.Substring(1) : t.Item2)).ToArray<string>();
 
             if (dlg.RunModal() == 1)
             {
@@ -32,13 +34,13 @@ namespace CrossPad.MacOS.Custom
             return tcs.Task;
         }
 
-        public Task<string> SetFilePath(string[] AllowedTypes = null)
+        public Task<string> SetFilePath(Tuple<string, string>[] AllowedTypes = null)
         {
             var tcs = new TaskCompletionSource<string>();
 
             var dlg = new NSSavePanel();
             dlg.Title = "Save File";
-            dlg.AllowedFileTypes = new string[] { "txt" };
+            dlg.AllowedFileTypes = AllowedTypes.Select(t => (t.Item2.StartsWith(".") ? t.Item2.Substring(1) : t.Item2)).ToArray<string>();
 
             if (dlg.RunModal() == 1)
             {
