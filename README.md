@@ -1,6 +1,6 @@
 # Xamarin.Forms sample: CrossPad
 
-This is a sample project to show how we can develop a cross platform dekstop application using Xamarin.Forms.
+This is a sample project to show how we can develop a cross platform desktop application using Xamarin.Forms.
 
 This sample is a fully fonctional, yet simple, *notepad* made for Windows (WPF & UWP) and Mac OS.
 
