@@ -12,4 +12,4 @@ This sample is a fully fonctional, yet simple, *notepad* made for Windows (WPF &
 
 # Licence
 
-Wttop is under [MIT license](LICENSE)
+CrossPad is under [MIT license](LICENSE)
